@@ -18,7 +18,7 @@ function App() {
           <h2>Core Concepts</h2>
           <ul>
             {CORE_CONCEPTS.map((data) => (
-              <CoreConcepts {...data} />
+              <CoreConcepts key={data.title} {...data} />
             ))}
           </ul>
         </section>
