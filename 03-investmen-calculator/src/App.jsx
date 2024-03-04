@@ -4,15 +4,17 @@ import ResultsList from "./components/ResultsList";
 import UserInput from "./components/UserInput";
 
 function App() {
-  const [annualData, setAnnualData] = useState({
+  const [userInput, setUserInput] = useState({
     initialInvestment: 10000,
     annualInvestment: 1200,
     expectedReturn: 6,
     duration: 10,
   });
+
+  const isValidDuration = userInput.duration > 0;
   const handleInputChange = (e) => {
-    setAnnualData((prevData) => {
-      const data = { ...prevData, [e.target.name]: e.target.value };
+    setUserInput((prevData) => {
+      const data = { ...prevData, [e.target.name]: +e.target.value };
       return data;
     });
   };
@@ -21,9 +23,13 @@ function App() {
       <Header />
       <UserInput
         onInputChange={handleInputChange}
-        annualData={annualData}
+        userInput={userInput}
       ></UserInput>
-      <ResultsList annualData={annualData}></ResultsList>
+      {isValidDuration ? (
+        <ResultsList input={userInput}></ResultsList>
+      ) : (
+        <p className="center">Please enter a duration greater than zero</p>
+      )}
     </>
   );
 }

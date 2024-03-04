@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserInput({ onInputChange, annualData }) {
+function UserInput({ onInputChange, userInput }) {
   return (
     <section id="user-input">
       <div className="input-group">
@@ -10,7 +10,7 @@ function UserInput({ onInputChange, annualData }) {
             name="initialInvestment"
             type="number"
             onChange={onInputChange}
-            value={annualData.initialInvestment}
+            value={userInput.initialInvestment}
             required
           />
         </p>
@@ -20,7 +20,7 @@ function UserInput({ onInputChange, annualData }) {
             name="annualInvestment"
             type="number"
             onChange={onInputChange}
-            value={annualData.annualInvestment}
+            value={userInput.annualInvestment}
             required
           />
         </p>
@@ -32,7 +32,7 @@ function UserInput({ onInputChange, annualData }) {
             name="expectedReturn"
             type="number"
             onChange={onInputChange}
-            value={annualData.expectedReturn}
+            value={userInput.expectedReturn}
             required
           />
         </p>
@@ -42,7 +42,7 @@ function UserInput({ onInputChange, annualData }) {
             name="duration"
             type="number"
             onChange={onInputChange}
-            value={annualData.duration}
+            value={userInput.duration}
             required
           />
         </p>

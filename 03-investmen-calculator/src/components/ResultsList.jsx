@@ -2,10 +2,8 @@ import React from "react";
 
 import { formatter, calculateInvestmentResults } from "../util/investment";
 
-function ResultsList({ annualData }) {
-  if (annualData.duration < 1)
-    return <p className="center">The minimum duration is 1!</p>;
-  const results = calculateInvestmentResults(annualData);
+function ResultsList({ input }) {
+  const results = calculateInvestmentResults(input);
   let totalInterest = 0;
   return (
     <section id="results">
@@ -22,13 +20,14 @@ function ResultsList({ annualData }) {
         <tbody>
           {results.map(({ year, valueEndOfYear, interest }) => {
             totalInterest += interest;
+            const totalAmountInvested = valueEndOfYear - totalInterest;
             return (
-              <tr>
+              <tr key={year}>
                 <td>{year}</td>
                 <td>{formatter.format(valueEndOfYear)}</td>
                 <td>{formatter.format(interest)}</td>
                 <td>{formatter.format(totalInterest)}</td>
-                <td>{formatter.format(valueEndOfYear - totalInterest)}</td>
+                <td>{formatter.format(totalAmountInvested)}</td>
               </tr>
             );
           })}
