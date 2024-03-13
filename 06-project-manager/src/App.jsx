@@ -8,6 +8,7 @@ function App() {
   const [projectState, setProjectState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
 
   const handleStartAddProject = () => {
@@ -22,6 +23,27 @@ function App() {
       ...prevProjects,
       selectedProjectId: undefined,
       projects: [...prevProjects.projects, projectData],
+    }));
+  };
+
+  const handleAddTask = (text) => {
+    setProjectState((prevProjects) => ({
+      ...prevProjects,
+      tasks: [
+        ...prevProjects.tasks,
+        {
+          text: text,
+          projectId: prevProjects.selectedProjectId,
+          id: Math.random(),
+        },
+      ],
+    }));
+  };
+
+  const handleDeleteTask = (id) => {
+    setProjectState((prevState) => ({
+      ...prevState,
+      tasks: prevState.tasks.filter((task) => task.id !== id),
     }));
   };
 
@@ -41,6 +63,7 @@ function App() {
 
   const handleDelete = (projectId) => {
     setProjectState((prevState) => ({
+      ...prevState,
       selectedProjectId: undefined,
       projects: prevState.projects.filter(
         (project) => project.id !== projectId
@@ -48,7 +71,22 @@ function App() {
     }));
   };
 
-  let content;
+  const selectedProject = projectState.projects.find(
+    (project) => project.id === projectState.selectedProjectId
+  );
+  const tasks = projectState.tasks.filter(
+    (task) => task.projectId === projectState.selectedProjectId
+  );
+  let content = (
+    <ProjectView
+      project={selectedProject}
+      onDeleteProject={handleDelete}
+      onAddTask={handleAddTask}
+      onDeleteTask={handleDeleteTask}
+      tasks={tasks}
+    />
+  );
+
   if (projectState.selectedProjectId === null) {
     content = (
       <NewProject onAddProject={handleSaveAddProject} onCancel={handleCancel} />
@@ -56,13 +94,6 @@ function App() {
   } else if (projectState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartProject={handleStartAddProject} />;
   }
-  const selectedProject = projectState.projects.find(
-    (project) => project.id === projectState.selectedProjectId
-  );
-
-  content = (
-    <ProjectView project={selectedProject} onDeleteProject={handleDelete} />
-  );
 
   return (
     <main className="h-screen my-8 flex gap-8">

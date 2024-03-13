@@ -1,5 +1,12 @@
-const ProjectView = ({ project, onDeleteProject }) => {
-  console.log(project);
+import Tasks from "./Tasks";
+
+const ProjectView = ({
+  project,
+  onDeleteProject,
+  onAddTask,
+  onDeleteTask,
+  tasks,
+}) => {
   const { title, description, dueDate, id } = project;
   const formattedDate = new Date(dueDate).toLocaleDateString("en-UK", {
     year: "numeric",
@@ -21,8 +28,7 @@ const ProjectView = ({ project, onDeleteProject }) => {
         <p className="mb-4 text-stone-400">{formattedDate}</p>
         <p className="text-stone-600 whitespace-pre-wrap">{description}</p>
       </header>
-      <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
-      <ul></ul>
+      <Tasks onAdd={onAddTask} onDelete={onDeleteTask} tasks={tasks} />
     </div>
   );
 };
