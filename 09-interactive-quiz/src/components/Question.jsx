@@ -7,6 +7,16 @@ const Question = ({ onSelectAnswer, onSkipedAnswer, index }) => {
     selectedAnswer: "",
     isCorrect: null,
   });
+
+  let timer = 10000;
+
+  if (answer.selectedAnswer) {
+    timer = 1000;
+  }
+
+  if (answer.isCorrect !== null) {
+    timer = 2000;
+  }
   const handleSelect = (answer) => {
     setAnswer({
       selectedAnswer: answer,
@@ -37,7 +47,12 @@ const Question = ({ onSelectAnswer, onSkipedAnswer, index }) => {
         selectedAnswer={answer.selectedAnswer}
         onSelect={handleSelect}
       />
-      <QuestionTimer timeout={10000} onTimeout={onSkipedAnswer} />
+      <QuestionTimer
+        key={timer}
+        timeout={timer}
+        mode={answerState}
+        onTimeout={!answer.selectedAnswer ? onSkipedAnswer : null}
+      />
     </div>
   );
 };

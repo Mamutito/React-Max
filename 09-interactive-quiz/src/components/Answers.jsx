@@ -9,7 +9,6 @@ const Answers = ({ answers, answerState, selectedAnswer, onSelect }) => {
   return (
     <ul id="answers">
       {suffledAnswers.current.map((answer) => {
-        console.log("answer", suffledAnswers.current);
         const isSelected = selectedAnswer === answer;
         let cssClass;
         if (answerState === "answered" && isSelected) {
@@ -20,7 +19,6 @@ const Answers = ({ answers, answerState, selectedAnswer, onSelect }) => {
         ) {
           cssClass = answerState;
         }
-        console.log("cssClass", cssClass);
         return (
           <li key={answer} className="answer">
             <button
