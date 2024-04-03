@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 export default function RefLogin() {
+  const [emailIsInvalid, setEmailIsInvalid] = useState(false);
   const email = useRef();
   const password = useRef();
   const handleSubmit = (e) => {
@@ -9,20 +10,16 @@ export default function RefLogin() {
       email: email.current.value,
       password: password.current.value,
     };
-    console.log(enteredValues);
+
+    if (!enteredValues.email.includes("@")) {
+      setEmailIsInvalid(true);
+      return;
+    }
+
+    setEmailIsInvalid(false);
+
+    console.log("HTTP: REQUEST");
   };
-
-  const [didEdit, setDidEdit] = useState({ email: false, password: false });
-
-  const handleInputChange = (id) => {
-    setDidEdit((prevEdit) => ({ ...prevEdit, [id]: false }));
-  };
-
-  const handleInputBlur = (id) => {
-    setDidEdit((prevEdit) => ({ ...prevEdit, [id]: true }));
-  };
-
-  const emailIsInvalid = didEdit.email && !email.current.value.includes("@");
 
   return (
     <form onSubmit={handleSubmit}>
@@ -31,14 +28,7 @@ export default function RefLogin() {
       <div className="control-row">
         <div className="control no-margin">
           <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            ref={email}
-            onChange={() => handleInputChange("email")}
-            onBlur={() => handleInputBlur("email")}
-          />
+          <input id="email" type="email" name="email" ref={email} />
           <div className="control-error">
             {emailIsInvalid && <p>Please enter a valid email address.</p>}
           </div>
