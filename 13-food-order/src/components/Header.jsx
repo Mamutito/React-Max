@@ -12,10 +12,8 @@ function Header() {
     0
   );
   const handleShowCart = () => {
-    console.log("click");
     showCart();
   };
-  console.log("progress2", progress);
   return (
     <header id="main-header">
       <div id="title">
