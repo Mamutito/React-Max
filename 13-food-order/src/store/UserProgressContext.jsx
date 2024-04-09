@@ -11,7 +11,6 @@ export function UserProgressContextProvider({ children }) {
   const [userProgress, setUserProgress] = useState("");
 
   const showCart = () => {
-    console.log("click");
     setUserProgress("cart");
   };
 
