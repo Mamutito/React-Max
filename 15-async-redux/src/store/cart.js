@@ -5,27 +5,22 @@ const cartSlice = createSlice({
   initialState: { cart: [], showCart: false },
   reducers: {
     addItem: (state, action) => {
-      const existItem = state.cart.findIndex(
-        (item) => item.title === action.payload.title
+      const existItem = state.cart.find(
+        (item) => item.id === action.payload.id
       );
 
-      if (existItem === -1) {
-        state.cart.push(action.payload);
+      if (existItem) {
+        existItem.quantity++;
       } else {
-        state.cart[existItem].quantity++;
+        state.cart.push(action.payload);
       }
     },
     removeItem: (state, action) => {
-      const existItem = state.cart.findIndex(
-        (item) => item.title === action.payload
-      );
-      if (state.cart[existItem].quantity <= 1) {
-        const filteredCart = state.cart.filter(
-          (item) => item.title !== action.payload
-        );
-        state.cart = filteredCart;
+      const existItem = state.cart.find((item) => item.id === action.payload);
+      if (existItem.quantity === 1) {
+        state.cart = state.cart.filter((item) => item.title !== action.payload);
       } else {
-        state.cart[existItem].quantity--;
+        existItem.quantity--;
       }
     },
     toggleCart: (state) => {
