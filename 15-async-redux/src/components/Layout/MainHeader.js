@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import CartButton from "../Cart/CartButton";
 import classes from "./MainHeader.module.css";
-import { cartActions } from "../../store/cart";
+import { cartActions } from "../../store/cartActions";
 
 const MainHeader = (props) => {
   const dispatch = useDispatch();
