@@ -1,5 +1,4 @@
 import { Link, Outlet, useParams } from "react-router-dom";
-
 import Header from "../Header.jsx";
 import { useQuery } from "@tanstack/react-query";
 import { fetchEvent } from "../../utils/http.js";
@@ -13,6 +12,7 @@ export default function EventDetails() {
     queryKey: ["event", id],
     queryFn: ({ signal }) => fetchEvent({ id, signal }),
   });
+
   return (
     <>
       <Outlet />
@@ -33,10 +33,11 @@ export default function EventDetails() {
           <header>
             <h1>{data.title}</h1>
             <nav>
-              <button>Delete</button>
+              <Link to="delete">Delete</Link>
               <Link to="edit">Edit</Link>
             </nav>
           </header>
+
           <div id="event-details-content">
             <img src={`http://localhost:3000/${data.image}`} alt={data.title} />
             <div id="event-details-info">

@@ -392,13 +392,44 @@ ul {
   align-items: center;
 }
 
-.error-block h2 {
+.warning-block {
+  background-color: #fffec5;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #d1bc02;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  text-align: left;
+}
+
+.message-block {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-align: left;
+}
+
+.warning-block-icon {
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  color: #fff;
+  background-color: #d1bc02;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-block h2, .warning-block h2 {
   color: inherit;
   font-size: 1.25rem;
   margin: 0;
 }
 
-.error-block p {
+.error-block p, .warning-block p {
   margin: 0;
 }
 
