@@ -9,7 +9,7 @@ export default function EventDetails() {
   const { id } = useParams();
 
   const { data, isError, error, isPending } = useQuery({
-    queryKey: ["event", id],
+    queryKey: ["events", id],
     queryFn: ({ signal }) => fetchEvent({ id, signal }),
   });
 
