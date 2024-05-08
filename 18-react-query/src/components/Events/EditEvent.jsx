@@ -18,9 +18,9 @@ export default function EditEvent() {
 
   const { mutate } = useMutation({
     mutationFn: updateEvent,
-    onMutate: ({ event }) => {
+    onMutate: async ({ event }) => {
       //optimistic update
-      client.cancelQueries({ queryKey: ["events", id] });
+      await client.cancelQueries({ queryKey: ["events", id] });
       const prevData = client.getQueryData(["events", id]);
       client.setQueryData(["events", id], event);
       return { prevData };
