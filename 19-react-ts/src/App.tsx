@@ -6,15 +6,17 @@ import Todos from './components/Todos';
 import Todo from './models/todo';
 
 function App() {
-  // const todos = [new Todo('React'), new Todo('Typescript')]
   const [todos, setTodos] = useState<Todo[]>([])
   const handleAddTodo = (todoText: string)=>{
     setTodos(prev => [...prev, new Todo(todoText)])
   }
+  const handleRemoveTodo = (id: string)=>{
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
   return (
     <div className="App">
       <NewTodo onAddTodo={handleAddTodo}/>
-      <Todos items={todos}/>
+      <Todos items={todos} onRemoveTodo={handleRemoveTodo}/>
     </div>
   );
 }
